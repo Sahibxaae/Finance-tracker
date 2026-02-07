@@ -130,7 +130,7 @@ function App() {
               <ul>
                 {transactions.map((t) => (
                   <li key={t.id}>
-                    {t.text} - {t.amount}{" "}
+                    {t.text} - <span>&#8377;{t.amount}</span>
                     <span className="date">
                       {day}-{month}-{year} {hours}
                     </span>

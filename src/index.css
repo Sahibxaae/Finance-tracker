@@ -5,7 +5,7 @@
 }
 body {
   font-family: "Inter";
-   padding: 0.8rem;
+  padding: 0.8rem;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -95,6 +95,7 @@ button {
   display: block;
   font-size: 0.9rem;
   color: #989898;
+  text-wrap: wrap;
 }
 .transaction button {
   outline: none;
@@ -126,8 +127,13 @@ ul li {
   border-radius: 5px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+ul li .trash {
+  margin-left: auto;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 .date {
   font-weight: 400;
@@ -148,12 +154,8 @@ ul li {
 
   .chart-history {
     display: flex;
-    gap: 2rem;
-  }
-
-  .chart,
-  .history {
-    flex: 1;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .income-exp .income,
@@ -240,14 +242,9 @@ ul li {
 
   /* Transaction list */
   ul li {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
     gap: 6px;
     font-size: 1rem;
-  }
-
-  .trash {
-    align-self: flex-end;
   }
 
   .date {
