@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {
   Wallet,
   Trash2,
@@ -46,6 +46,14 @@ function App() {
   const expense = amounts
     .filter((a) => a < 0)
     .reduce((acc, val) => acc + val, 0);
+
+    useEffect(() => {
+  localStorage.setItem(
+    "transactions",
+    JSON.stringify(transactions)
+  );
+}, [transactions]);
+
   return (
     <div className="container">
       {/* Header section */}
