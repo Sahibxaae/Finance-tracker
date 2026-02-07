@@ -329,32 +329,36 @@ ul li {
 /* Extra small phones (480px and below) */
 @media (max-width: 480px) {
   .container {
-    padding: 0.6rem;
+    width:315px;
+    padding: 0.8rem;
     border-radius: 8px;
   }
 
   .logo {
-    font-size: 0.9rem;
+    font-size: 1.7rem;
     margin-bottom: 12px;
   }
-
+  .logo .wallet-logo{
+    width: 35px;
+    height: 35px;
+  }
   .balance h1 {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
   }
 
   .balance h4 {
-    font-size: 0.65rem;
+    font-size: 0.95rem;
   }
 
   .income-exp .income,
   .income-exp .expense {
-    height: 70px;
+    height: 90px;
     border-radius: 10px;
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
 
   .in-ex-amount {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
   .sub-headers {
@@ -364,12 +368,13 @@ ul li {
   .transaction input,
   .transaction button {
     height: 40px;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
   }
 
   ul li {
     padding: 0.5rem;
-    font-size: 0.85rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
   }
 
   .date {
@@ -377,7 +382,7 @@ ul li {
   }
 
   .trash svg {
-    width: 16px;
-    height: 16px;
+    width: 25px;
+    height: 25px;
   }
 }
