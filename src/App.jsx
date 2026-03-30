@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Wallet,
   Trash2,
@@ -8,6 +8,7 @@ import {
   TrendingDown,
   Library,
 } from "lucide-react";
+import ChartBar from "./components/ChartBar";
 import "./App.css";
 
 function App() {
@@ -17,25 +18,26 @@ function App() {
   });
   const [text, setText] = useState("");
   const [amount, setAmount] = useState("");
-  const date = new window.Date();
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  const hours = date.toLocaleTimeString("en-IN");
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
 
   function addTransaction(text, amount) {
+    const date = new window.Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.toLocaleTimeString("en-IN");
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    const timeStamp = `${day}-${month}-${year} ${hours}`;
     if (!text || !amount) return;
     setTransactions((prev) => [
-      { id: Date.now(), text: text, amount: amount },
+      { id: Date.now(), text: text, amount: amount, time: timeStamp },
       ...prev,
     ]);
     setText("");
     setAmount("");
   }
-  function removeItem(id){
-    setTransactions(prev => prev.filter(t=>t.id!==id));
+  function removeItem(id) {
+    setTransactions((prev) => prev.filter((t) => t.id !== id));
   }
 
   const amounts = transactions.map((t) => t.amount);
@@ -47,12 +49,9 @@ function App() {
     .filter((a) => a < 0)
     .reduce((acc, val) => acc + val, 0);
 
-    useEffect(() => {
-  localStorage.setItem(
-    "transactions",
-    JSON.stringify(transactions)
-  );
-}, [transactions]);
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
 
   return (
     <div className="container">
@@ -121,7 +120,15 @@ function App() {
       <div className="chart-history">
         <div className="chart">
           <h2 className="sub-headers">Financial overview</h2>
-          <p>Add transactions to see breakdown</p>
+          {transactions.length > 0 ? (
+            <ChartBar
+              transactions={transactions}
+              income={income}
+              expense={expense}
+            />
+          ) : (
+            <p>Add transactions to see breakdown</p>
+          )}
         </div>
         <div className="history">
           <h2 className="sub-headers">Transaction overview</h2>
@@ -131,10 +138,10 @@ function App() {
                 {transactions.map((t) => (
                   <li key={t.id}>
                     {t.text} - <span>&#8377;{t.amount}</span>
-                    <span className="date">
-                      {day}-{month}-{year} {hours}
+                    <span className="date">{t.time}</span>
+                    <span className="trash" onClick={() => removeItem(t.id)}>
+                      <Trash2 />
                     </span>
-                    <span className="trash" onClick={()=>removeItem(t.id)}><Trash2/></span>
                   </li>
                 ))}
               </ul>
